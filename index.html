@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Disease Prediction</title>
+
+  <!--  external stylesheet  -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>AI Disease Prediction System</h1>
+  </header>
+
+  <main class="card">
+    <h2>Enter Your Symptoms</h2>
+
+    <!-- simple text-area input; swap for check-boxes or selects if you wish -->
+    <textarea id="symptoms" rows="4"
+      placeholder="e.g. fever, cough, headache"></textarea>
+
+    <button id="predictBtn">Predict</button>
+
+    <!-- where the “AI” will write its answer -->
+    <p id="result" class="result"></p>
+  </main>
+
+  <!-- ─────  Demo JavaScript  ───── -->
+  <script>
+    // Tiny mock model: maps keywords → likely disease
+    const mockModel = (text) => {
+      const t = text.toLowerCase();
+      if (t.includes('fever') && t.includes('cough')) return 'Flu (high probability)';
+      if (t.includes('chest pain'))               return 'Possible Cardiac Issue';
+      if (t.includes('headache') && t.includes('vomit')) return 'Migraine';
+      return 'Insufficient data – please add more details';
+    };
+
+    document.getElementById('predictBtn').addEventListener('click', () => {
+      const symptoms = document.getElementById('symptoms').value;
+      // 👉 Replace mockModel with your real AI call
+      const prediction = mockModel(symptoms);
+      document.getElementById('result').textContent = prediction;
+    });
+  </script>
+</body>
+</html>
